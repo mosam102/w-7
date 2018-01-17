@@ -82,7 +82,17 @@ public class studentcontroller{
 	//Choose a Group
 
 	@PostMapping(path="/joinGroup")
-    public  String chooseGroup(Model model,@ModelAttribute Student student){
+    public  String chooseGroup(@ModelAttribute Student student, Errors errors,Model model){
+		if(student.getNameRelGroup()==null || groupRepo.count()==0){
+			model.addAttribute("errorNachricht2","Bitte beachten die eingegebenen Daten");
+			model.addAttribute("Liste2",groupRepo.findAll());
+			return "/joinGroup";
+		}
+		if(!findGroup(student.getNameRelGroup())){
+			model.addAttribute("errorNachricht1","There is no group with that name");
+			model.addAttribute("Liste2",groupRepo.findAll());
+			return "/joinGroup";
+		}
 		Group g=groupRepo.findOneByName(student.getNameRelGroup());
 		student.setRelGroup(g);
 		student.setInGroup(true);
@@ -121,11 +131,11 @@ public class studentcontroller{
 		System.out.println("delete!");
 		Student s= studentRepo.findOneByMatnr(student.getMatnr());
 		Group g=s.getRelGroup();
-		for( Student st: g.members){
+		/*for( Student st: g.members){
 			if(st.getId()==s.getId()){
 				g.members.remove(st.getId());
 			}
-		}
+		}*/
 		studentRepo.delete(s);
 		model.addAttribute("Liste",studentRepo.findAll());
 		return  "/remove";
@@ -223,4 +233,12 @@ public class studentcontroller{
 		Student s=studentRepo.findOneByMatnr(matnr);
 		return s.isInGroup;
 	}
+
+	public boolean findGroup(String name){
+		if (groupRepo.findOneByName(name)!=null){
+			return true;
+		}
+		return false;
+	}
+
 }
