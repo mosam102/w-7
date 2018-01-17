@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Propra2 Teilnehmerliste</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="/css/bootstrap.min.css"></link>
+<script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<span class="navbar-brand" >Propra2 Teilnehmer</span>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item active"><a class="nav-link" href="all">Liste
+							<span class="sr-only">(current)</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="addStudent">New Student</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="remove">Remove Student</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="addGroup">New Group </a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="allGroup">all Groups </a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="removeGroup">remove Group </a>
+					</li>
+					_______________
+					<li class="nav-item"><a class="nav-link" href="logOut">log Out </a>
+					</li>
+					
+					
+				</ul>
+			</div>
+		</nav>
+
+
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">id</th>
+					<th scope="col">Name</th>
+					<th scope="col">Is in Group</th>
+					<th scope="col">Matrikelnummer</th>
+					<th scope="col" colspan="2">group</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="t,iterationStatus  : ${Liste}">
+					<td th:text="${t.id}">id</td>
+					<td th:text="${t.name}">Name</td>
+					<td th:text="${t.isInGroup}">isInGroup</td>
+					<td th:text="${t.matnr}">Matrikelnummer</td>
+					<td th:each="a :${t.relGroup}" th:text="${a.id}">id</td>
+					<td th:each="a :${t.relGroup}" th:text="${a.name}">name</td>
+				
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

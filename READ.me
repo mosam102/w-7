@@ -1,6 +1,0 @@
-#w-7
-# w-7
-holla!
-ffff
-ggg
-hhh
