@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Propra2 Teilnehmer löschen</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="/css/bootstrap.min.css"></link>
+<script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<span class="navbar-brand">Propra2 Teilnehmer</span>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item active"><a class="nav-link" href="allGroup">Group Liste
+							<span class="sr-only">(current)</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="/group/addGroup">New Group</a>
+					</li>
+					_______________
+					<li class="nav-item"><a class="nav-link" href="/logOut">log Out </a>
+					</li>
+		
+				</ul>
+			</div>
+		</nav>
+		<div style="margin: 1em;">
+			<form method="get" action="/group/removeGroupFrom">
+				
+	       <div class="form-group">
+					<label >Group Name</label>
+    				 <select th:name="name1" th:type="text">
+   				    	<option th:each="a : ${Liste2}"  th:text="${a.name}" th:value="${a.name}">
+   				    	</option>
+			   	   	
+   				    </select> 
+  								
+			</div>	
+				<button type="submit" class="btn btn-primary">Submit</button>
+		
+				<table class="table">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">id</th>
+							<th scope="col">Name</th>
+							<th scope="col">students</th>
+				
+						</tr>
+					</thead>
+				<tbody>
+					<tr th:each="t,iterationStatus  : ${Liste2}">
+						<td ><a href="studentsOfGroup"  th:text="${t.id}" th:field="*{id}"></a></td>
+						<td th:text="${t.name}">Name</td>
+					<td th:text="${t.num}" ></td>
+				</tr>
+			</tbody>
+		</table>
+		
+			</form>
+		</div>
+	</div>
+</body>
+</html>

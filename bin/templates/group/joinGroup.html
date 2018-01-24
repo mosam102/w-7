@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Propra2 Teilnehmerliste</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="/css/bootstrap.min.css"></link>
+<script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<span class="navbar-brand" >Propra2 Teilnehmer</span>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link" href="/group/addGroup">New Group </a>
+					</li>
+					_______________
+					<li class="nav-item"><a class="nav-link" href="/logOut">log Out </a>
+					</li>
+		
+				</ul>
+			</div>
+		</nav>
+		
+		<form method="post" action="/joinGroup" th:object="${student}">
+			<label >Suche dir eine Gruppe :)</label>
+			<p th:text="${student.name}" ></p>
+			
+	       <div class="form-group">
+					<label >Group Name</label>
+    				 <select th:name="name1" th:type="text">
+   				    	<option th:each="a : ${Liste2}"  th:text="${a.name}" th:value="${a.name}">
+   				    	</option>
+			   	   	
+   				    </select> 
+  								
+			</div>	
+			
+		<!--    <div class="form-group">
+					<label for="nameRelGroup">Group :</label> <input type="text"
+						class="form-control" th:field="*{nameRelGroup}" 
+						placeholder="Group Name"></input>
+				</div>		-->	
+			<div class="form-group">
+					<label th:for="nameInput"></label> <input type="hidden"
+						class="form-control" th:field="*{name}" 
+						placeholder="${student.name}"></input>
+				</div>
+				<div class="form-group">
+					<label for="matInput"></label> <input type="hidden"
+						class="form-control" th:field="*{matnr}"
+						placeholder="${student.matnr}"></input>
+				</div> 
+				<div class="form-group">
+			   		<font color="red">
+					<p th:text="${errorNachricht2}"></p>
+					</font>
+				</div>
+				<div class="form-group">
+			   		<font color="red">
+					<p th:text="${errorNachricht1}"></p>
+					</font>
+						
+				</div>   		
+		<button type="submit" class="btn btn-primary">Submit</button>
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">id</th>
+					<th scope="col">Name</th>
+					<th scope="col">students</th>
+				
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="t,iterationStatus  : ${Liste2}">
+					<td th:text="${t.id}">id</td>
+					<td th:text="${t.name}">Name</td>
+					<td th:text="${t.num}" ></td>
+				</tr>
+			</tbody>
+		</table>
+	
+	</form>
+	</div>
+</body>
+</html>

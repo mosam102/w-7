@@ -25,55 +25,16 @@ public class Group {
 	@OneToMany(mappedBy="relGroup",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	public List<Student> members;
 	
+	@OneToMany(mappedBy="relAppGroup",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	private List<Apply> applys;
+	
 	private long num;
 	
 	
-	public long getId() {
-		return id;
-	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Student getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Student admin) {
-		this.admin = admin;
-	}
-	
-	public List<Student> getMembers(){
-		return members;
+	/*public long getNum() {
 		
-	}
-
-	public void setMembers(List<Student> members){
-		this.members=members;
-		
-	}
-
-	public long getNum() {
-		num=0;
-		for(Student s : members){
-			num++;
-		}
-	
-		return num;
-	}
-
-	public void setNum(long num) {
-		this.num = num;
-	}
-	
+		return (long)members.size();
+	}*/
 	
 }

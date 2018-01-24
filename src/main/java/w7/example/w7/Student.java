@@ -34,6 +34,11 @@ public class Student {
 	@ManyToOne
 	@JoinColumn(name="relGroup")
 	private Group relGroup;
+	
+	@ManyToOne
+	@JoinColumn(name="relApply")
+	private Apply relApply;
+	
 	private String nameRelGroup;
 	
 	public String getNameRelGroup() {
@@ -47,44 +52,8 @@ public class Student {
 	
 	public boolean isInGroup;
 	
-	public boolean isInGroup() {
-		return isInGroup;
-	}
-	public void setInGroup(boolean isInGroup) {
-		this.isInGroup = isInGroup;
-	}
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getMatnr() {
-		return matnr;
-	}
-	public void setMatnr(String matnr) {
-		this.matnr = matnr;
-	}
-	public Group getRelGroup() {
-		return relGroup;
-	}
-	public void setRelGroup(Group relGroup) {
-		this.relGroup = relGroup;
-	}
-	public Group getAdminForGroup() {
-		return adminForGroup;
-	}
-	public void setAdminForGroup(Group adminForGroup) {
-		this.adminForGroup = adminForGroup;
-	}
 	
 	
-	
+		
 	
 }
