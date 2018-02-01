@@ -34,10 +34,36 @@
 				</ul>
 			</div>
 		</nav>
-
-
-		<table class="table">
+		<div style="float: left">
+		<span class="navbar-brand" >Groups</span>
+		<div style="width:520px; height:300px; overflow:auto;">
+		<table class="table" >
 			<thead class="thead-dark">
+				<tr>
+					<th scope="col">id</th>
+					<th scope="col">Name</th>
+					<th scope="col">Students</th>
+					<th scope="col">Applys</th>
+				
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="a,iterationStatus  : ${Liste2}">
+					<td ><a href="studentsOfGroup"  th:text="${a.id}" th:field="*{id}"></a></td>
+					<td th:text="${a.name}">Name</td>
+				<!--	<td th:text="${a.members.size()}" ></td>   
+					<td th:text="${a.applys.size()}" ></td>	-->
+				</tr>
+			</tbody>
+		</table>
+		</div>
+		</div>
+		<div style="float: right">
+
+		<span class="navbar-brand" >Bewerbungen</span>
+		<div style="width:520px; height:300px; overflow:auto;">
+		<table class="table"  >
+			<thead class="thead-light">
 				<tr>
 					<th scope="col">id</th>
 					<th scope="col">Student Name</th>
@@ -46,7 +72,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="t,iterationStatus  : ${applyListe}">
+				<tr th:each="t,iterationStatus  : ${applyList}">
 					<td th:text="${t.id}">isInGroup</td>
 					<td th:text="${t.candidate.name}">id</td>
 					<td th:text="${t.relAppGroup.name}">Name</td>
@@ -54,6 +80,8 @@
 				</tr>
 			</tbody>
 		</table>
+		</div>
+		</div>
 	</div>
 </body>
 </html>

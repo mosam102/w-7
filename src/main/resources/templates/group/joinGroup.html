@@ -77,7 +77,7 @@
 				<tr th:each="t,iterationStatus  : ${Liste2}">
 					<td th:text="${t.id}">id</td>
 					<td th:text="${t.name}">Name</td>
-					<td th:text="${t.num}" ></td>
+					<td th:text="${t.members.size()}" ></td>
 				</tr>
 			</tbody>
 		</table>

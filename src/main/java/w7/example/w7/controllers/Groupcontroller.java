@@ -37,6 +37,8 @@ public class Groupcontroller {
 	public  String getAllGroup(Model model){
 		//groupRepo.deleteAll();
 		model.addAttribute("Liste2",groupRepo.findAll());
+		model.addAttribute("applyList",applyRepo.findAll());
+		
 		return "/group/groupList";
 	}
 	
@@ -75,9 +77,12 @@ public class Groupcontroller {
 			Student s=studentRepo.findOneByMatnr(student.getMatnr());
 			Group gra=new Group();
 			gra.setName(student.getNameRelGroup());
-			gra.setAdmin(s);
+			//gra.setAdmin(s);
+			groupRepo.save(gra);			
 			s.setInGroup(true);
-			groupRepo.save(gra);
+			s.setRelGroup(gra);
+			studentRepo.save(s);
+			
 		}
 		
 		private void creatNewStudentAndGroup(Student student){

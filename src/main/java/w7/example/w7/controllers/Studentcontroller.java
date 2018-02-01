@@ -41,6 +41,8 @@ public class Studentcontroller{
 
 	@GetMapping(path="/")
 	public  String signin(Model model){
+		//studentRepo.deleteAll();
+		//groupRepo.deleteAll();
 		model.addAttribute("Liste",studentRepo.findAll());
 		model.addAttribute(new Student());
 		
@@ -77,18 +79,21 @@ public class Studentcontroller{
 			return "/student/addstudent";
 		}
 		model.addAttribute("Liste2",groupRepo.findAll());
-		//studentRepo.save(student);
+		studentRepo.save(student);
 		model.addAttribute("student",student);
 	
 		return "/group/joinGroup";
 	}
 		@PostMapping(path="/joinGroup")
 		public  String chooseGroup(@ModelAttribute Student student,@RequestParam String name1, Errors errors,Model model){
+			Student s=studentRepo.findOneByMatnr(student.getMatnr());
+			
 			Group g=groupRepo.findOneByName(name1);
-			student.setRelGroup(g);
-			student.setNameRelGroup(name1);
-			student.setInGroup(true);
-			studentRepo.save(student);
+			s.setRelGroup(g);
+			s.setNameRelGroup(name1);
+			s.setInGroup(true);
+			System.out.println("############### "+s.getId());
+			studentRepo.save(s);
 			model.addAttribute("student",student);
 			return ("/student/wellueberleitung") ;
 		}
@@ -99,6 +104,7 @@ public class Studentcontroller{
 			System.out.println(student.getMatnr());
 			Student s=studentRepo.findOneByMatnr(student.getMatnr());
 			Group g=groupRepo.findOneByName(s.getNameRelGroup());
+			model.addAttribute("applyList",applyRepo.findAll());
 			model.addAttribute("group",g);
 		
 		return "/student/studentsOfGroup";
@@ -130,6 +136,7 @@ public class Studentcontroller{
 			}
 		}*/
 		studentRepo.delete(s);
+		
 		model.addAttribute("Liste",studentRepo.findAll());
 		return  "/student/removeStudent";
 		

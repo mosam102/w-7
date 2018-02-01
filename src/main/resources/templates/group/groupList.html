@@ -36,7 +36,10 @@
 
 	<form method="post" action="studentsOfGroup" th:object="${group}">
 		
-		<table class="table">
+		<div style="float: left">
+		<span class="navbar-brand" >Groups</span>
+		<div style="width:520px; height:300px; overflow:auto;">
+		<table class="table" >
 			<thead class="thead-dark">
 				<tr>
 					<th scope="col">id</th>
@@ -55,7 +58,33 @@
 				</tr>
 			</tbody>
 		</table>
+		</div>
+		</div>
 		</form>
+		<div style="float: right">
+		<span class="navbar-brand" >Bewerbungen</span>
+		<div style="width:520px; height:300px; overflow:auto;">
+		<table class="table"  >
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">id</th>
+					<th scope="col">Student Name</th>
+					<th scope="col">Group</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="t,iterationStatus  : ${applyList}">
+					<td th:text="${t.id}">isInGroup</td>
+					<td th:text="${t.candidate.name}">id</td>
+					<td th:text="${t.relAppGroup.name}">Name</td>
+					
+				</tr>
+			</tbody>
+		</table>
+		</div>
+		</div>
+	
 	</div>
 </body>
 </html>

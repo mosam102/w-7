@@ -1,6 +1,7 @@
 package w7.example.w7;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -39,6 +40,7 @@ public class Apply {
 	
 	@OneToMany(mappedBy="relApply",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private List<Student> voters;
+	//private HashMap<Student,Boolean> map= new HashMap<>();
 	
 	private LocalDateTime deadline;
 }

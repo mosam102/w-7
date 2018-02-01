@@ -13,23 +13,23 @@
 			<span class="navbar-brand">Propra2 Teilnehmer</span>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
-					<li class="nav-item active"><a class="nav-link" href="all">Liste
+					<li class="nav-item active"><a class="nav-link" href="/all">Liste
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="addStudent">New Student</a>
+					<li class="nav-item"><a class="nav-link" href="/apply/applyList">Apply List</a>
 					</li>
 					_______________
-					<li class="nav-item"><a class="nav-link" href="logOut">log Out </a>
+					<li class="nav-item"><a class="nav-link" href="/logOut">log Out </a>
 					</li>
 		
 				</ul>
 			</div>
 		</nav>
 		<div style="margin: 1em;">
-			<form method="get" action="addApply" th:object="${apply}">
+			<form method="get" action="/apply/addApply2" th:object="${student}">
 				<div class="form-group">
-		<!--			<label th:for="nameInput">Name</label> <input type="text"
-						class="form-control" th:field="*{name}" 
+					<label th:for="nameInput">Name</label> <input type="text"
+						class="form-control" th:field="*{name}"
 						placeholder="Name"></input>
 					<span th:errors="*{name}"   class="error"></span>
 				</div>
@@ -38,7 +38,18 @@
 						class="form-control" th:field="*{matnr}"
 						placeholder="Matrikelnummer"></input>
 					<span th:errors="*{matnr}"   class="error"></span>
-				</div> -->
+				</div> 
+					
+	       		<div class="form-group">
+					<label >Group Name</label>
+    				 <select th:name="name1" th:type="text">
+   				    	<option th:each="a : ${Liste2}"  th:text="${a.name}" th:value="${a.name}">
+   				    	</option>
+			   	   	
+   				    </select> 
+  								
+			</div>	
+		
 	   				<div class="form-group">
 			   			<font color="red">
 						<p th:text="${errorNachricht}"></p>
@@ -46,7 +57,7 @@
 						
 				</div>
 			
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="submit" class="btn btn-primary">Add</button>
 			</form>
 		</div>
 	</div>
