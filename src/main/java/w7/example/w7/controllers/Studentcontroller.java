@@ -146,7 +146,7 @@ public class Studentcontroller{
 	public  String findStudent(@ModelAttribute @Valid Student student,Errors errors,Model model ){
 		if(errors.hasErrors() || (!findStudent(student.getMatnr()))){
 			model.addAttribute("errorNachricht","Diese Username and Passwort ist uns leider nicht bekannt!!!");
-		return "/student/logIn";
+		return "/logIn";
 
 		}
 		Student s= studentRepo.findOneByMatnr(student.getMatnr());
