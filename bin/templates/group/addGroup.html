@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Propra2 Teilnehmer hinzufügen</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="/css/bootstrap.min.css"></link>
+<script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<span class="navbar-brand">Propra2 Teilnehmer</span>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item active"><a class="nav-link" href="/group/allGroup">Liste
+							<span class="sr-only">(current)</span>
+					</a></li>
+						_______________
+					<li class="nav-item"><a class="nav-link" href="/logOut">log Out </a>
+					</li>
+							
+				</ul>
+			</div>
+		</nav>
+		<div style="margin: 1em;">
+			<form method="post" action="/group/addGroup2"  th:object="${student}">
+				<div class="form-group">
+					<label th:for="nameInput">Matrikelnummer</label> <input type="text"
+						class="form-control" th:field="*{matnr}"
+						placeholder="Matrikelnummer"></input>
+						<span th:errors="*{matnr}"   class="error"></span>
+				</div>
+				<div class="form-group">
+					<label th:for="nameInput">Name</label> <input type="text"
+						class="form-control" th:field="*{name}"
+						placeholder="Name"></input>
+					<span th:errors="*{name}"   class="error"></span>
+				</div>
+				<div class="form-group">
+					<label th:for="nameInput">Name for Group</label> <input type="text"
+						class="form-control" th:field="*{nameRelGroup}"
+						placeholder="Name"></input>
+				</div> 
+				
+			<div class="form-group">
+			   		<font color="red">
+					<p th:text="${errorNachricht}"></p>
+					</font>
+						
+			</div>   		
+				<button type="submit" class="btn btn-primary">Add</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
