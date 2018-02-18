@@ -3,6 +3,9 @@ package w7.example.w7.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.util.WebUtils;
 
 import w7.example.w7.Apply;
 import w7.example.w7.Group;
@@ -40,12 +44,13 @@ public class Studentcontroller{
 	private applyRepository applyRepo;
 
 	@GetMapping(path="/")
-	public  String signin(Model model){
+	public  String signin(Model model,HttpServletResponse response){
 		//studentRepo.deleteAll();
 		//groupRepo.deleteAll();
 		model.addAttribute("Liste",studentRepo.findAll());
 		model.addAttribute(new Student());
-		
+		Cookie cookie= new Cookie("first","000");
+		response.addCookie(cookie);
 		return "/logIn";
 	}
 	@GetMapping(path="/logOut")
@@ -143,7 +148,13 @@ public class Studentcontroller{
 	}
 	
 	@GetMapping(path="/findeOne")
-	public  String findStudent(@ModelAttribute @Valid Student student,Errors errors,Model model ){
+	public  String findStudent(@ModelAttribute @Valid Student student,Errors errors,Model model ,HttpServletResponse response,HttpServletRequest request){
+		String c="";
+		Cookie[] cookie=request.getCookies();
+		System.out.println(cookie[0].getValue());
+		WebUtils.getCookie(request, c);
+		
+		System.out.println("  ====> "+ c);
 		if(errors.hasErrors() || (!findStudent(student.getMatnr()))){
 			model.addAttribute("errorNachricht","Diese Username and Passwort ist uns leider nicht bekannt!!!");
 		return "/logIn";
