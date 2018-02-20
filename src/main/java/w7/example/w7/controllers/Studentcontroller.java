@@ -36,21 +36,22 @@ public class Studentcontroller{
 	
 	@Autowired
 	private studentRepository studentRepo;
-	
-	@Autowired
-	private groupRepository groupRepo ;
-	
-	@Autowired
-	private applyRepository applyRepo;
+
+  @Autowired
+  private groupRepository groupRepo;
+
+  @Autowired
+  private applyRepository applyRepo;
 
 	@GetMapping(path="/")
-	public  String signin(Model model,HttpServletResponse response){
+	public  String signin(Model model){
 		//studentRepo.deleteAll();
 		//groupRepo.deleteAll();
-		model.addAttribute("Liste",studentRepo.findAll());
+		//model.addAttribute("Liste",studentRepo.findAll());
 		model.addAttribute(new Student());
-		Cookie cookie= new Cookie("first","000");
-		response.addCookie(cookie);
+		//model.addAttribute("msg","SUCCESS");
+		//Cookie cookie= new Cookie("first","000");
+		//response.addCookie(cookie);
 		return "/logIn";
 	}
 	@GetMapping(path="/logOut")
@@ -63,9 +64,7 @@ public class Studentcontroller{
 	public  String getAllStudent(Model model){
 		model.addAttribute("Liste",studentRepo.findAll());
 		return "/student/studentList";
-	}
-	
-	
+	}	
 	
 	//Add new Student!!!!!!!!!!!!
 	
@@ -148,14 +147,14 @@ public class Studentcontroller{
 	}
 	
 	@GetMapping(path="/findeOne")
-	public  String findStudent(@ModelAttribute @Valid Student student,Errors errors,Model model ,HttpServletResponse response,HttpServletRequest request){
-		String c="";
-		Cookie[] cookie=request.getCookies();
-		System.out.println(cookie[0].getValue());
-		WebUtils.getCookie(request, c);
+	public  String findStudent(@ModelAttribute @Valid Student student,Errors errors,Model model ){
+		//String c="";
+		//Cookie[] cookie=request.getCookies();
+		//System.out.println(cookie[0].getValue());
+		//WebUtils.getCookie(request, c);
 		
-		System.out.println("  ====> "+ c);
-		if(errors.hasErrors() || (!findStudent(student.getMatnr()))){
+		//System.out.println("  ====> "+ c);
+		if( errors.hasErrors() || (!findStudent(student.getMatnr()))){
 			model.addAttribute("errorNachricht","Diese Username and Passwort ist uns leider nicht bekannt!!!");
 		return "/logIn";
 
@@ -184,8 +183,7 @@ public class Studentcontroller{
 		}
 		return false;
 	}
-	public void deleteStudent(Student s){
-		studentRepo.delete(s);
-			
-	}
+  public void deleteStudent(Student s){
+   studentRepo.delete(s);
+  }
 }
